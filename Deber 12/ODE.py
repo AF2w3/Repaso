@@ -1,30 +1,4 @@
 
-from typing import Callable
-
-
-def ODE_euler(
-    *,
-    a: float,
-    b: float,
-    f: Callable[[float, float], float],
-    y_t0: float,
-    N: int,
-) -> tuple[list[float], list[float], float]:
-    
-    h = (b - a) / N
-    t = a
-    ts = [t]
-    ys = [y_t0]
-
-    for _ in range(N):
-        y = ys[-1]
-        y += h * f(t, y)
-        ys.append(y)
-
-        t += h
-        ts.append(t)
-    return ys, ts, h
-
 
 
 from math import factorial
