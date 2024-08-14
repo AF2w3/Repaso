@@ -10,7 +10,29 @@ def ODE_euler(
     y_t0: float,
     N: int,
 ) -> tuple[list[float], list[float], float]:
-    
+    """Resuelve (numéricamente) una EDO de la forma
+        dy/dt = f(t, y)
+            y(t_0) = y_t0, a <= t_0 <= b
+    utilizando el método de Euler para los N+1 puntos del intervalo temporal [a, b].
+
+    Genera N+1 puntos de malla con:
+        t_i = a + i*h, h = (a - b) / N,
+    donde h es el tamaño del paso.
+
+
+    ## Parámetros
+    ``a``: tiempo inicial
+    ``b``: tiempo final
+    ``f``: función de dos variables ``t`` y ``y``
+    ``y_t0``: condición inicial
+    ``N``: número de puntos de malla
+
+    ## Devuelve
+    ``ys``: lista de los N+1 valores aproximados de y
+    ``ts``: lista de los N+1 puntos de malla
+    ``h``: el tamaño de paso h
+
+    """
     h = (b - a) / N
     t = a
     ts = [t]
@@ -39,7 +61,30 @@ def ODE_euler_nth(
     y_t0: float,
     N: int,
 ) -> tuple[list[float], list[float], float]:
-   
+    """Resuelve (numéricamente) una EDO de la forma
+        dy/dt = f(t, y)
+            y(t_0) = y_t0, a <= t_0 <= b
+    utilizando el método de Taylor con (m - 1)ª derivada para los N+1 puntos en el intervalo de tiempo [a, b].
+
+    Genera N+1 puntos de malla con:
+        t_i = a + i*h, h = (a - b) / N,
+    donde h es el tamaño del paso.
+
+
+    ## Parámetros
+    ``a``: tiempo inicial
+    ``b``: tiempo final
+    ``f``: función de dos variables ``t`` y ``y``
+    f_derivadas``: lista de (m - 1)th derivadas de f
+    y_t0``: condición inicial
+    ``N``: número de puntos de la malla
+
+    ## Devuelve
+    ``ys``: lista de los N+1 valores aproximados de y
+    ``ts``: lista de los N+1 puntos de malla
+    ``h``: el tamaño de paso h
+
+    """
     h = (b - a) / N
     t = a
     ts = [t]
@@ -64,7 +109,14 @@ def ODE_euler_nth(
 import numpy as np
 
 def interpolacion_lineal(y_1, y_2, x_val):
- 
+    """
+    Realiza la interpolación lineal para un valor x_val dado los puntos (x, y).
+
+    :param x: Lista o array de valores x conocidos.
+    :param y: Lista o array de valores y conocidos.
+    :param x_val: El valor x para el cual se desea interpolar el valor y.
+    :return: El valor interpolado y correspondiente a x_val.
+    """
     # Convertir listas a arrays numpy
     y_1 = np.array(y_1)
     y_2 = np.array(y_2)
